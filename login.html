@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="CSS/styleslogin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600&display=swap" rel="stylesheet">
+
+</head>
+<body id="login">
+    <h1>Login</h1>
+
+    <form class="loginform">
+        <div>
+            <label for="iemail">Email</label>
+        </div>
+        <div> 
+            <input type="email" name="email" id="iemail" placeholder="Digite seu email" oninput="onInputEmail()">
+            <p id="email-required-error">Email é obrigatório</p>
+            <p id="email-invalid-error">Email é inválido</p>
+        </div>
+        <div>
+            <label for="isenha">Senha</label>
+        </div>
+        <div>
+            <input type="password" name="senha" id="isenha" placeholder="Digite sua senha" oninput="onInputPassword()">
+            <p id="password-required-error">Senha é obrigatória</p>
+            <p id="password-invalid-error">Senha é inválido</p>
+        </div>
+        <div class="navig"><button type="button" id="login-button" disabled="true">Entrar</button></div>
+        <div class="navig"><button type="button" onclick="register()">Me registrar</button></div>
+        <div class="navig"><button type="button" id="recovery-button" disabled="true">Recuperar Senha</button></div>
+    </form>
+
+    <script src="JS/loading.js"></script>
+    <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCtIxe-nx_ADMYumjxjIFQRpxFJ_FvVtVA",
+            authDomain: "login-senai-exercicio.firebaseapp.com",
+            projectId: "login-senai-exercicio",
+            storageBucket: "login-senai-exercicio.appspot.com",
+            messagingSenderId: "921138755577",
+            appId: "1:921138755577:web:527844fcb9730256e3ef28"
+            };
+
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+
+        const formElements = {
+            email: () => document.getElementById(("iemail")),
+            emailInvalidError: () => document.getElementById(("email-invalid-error")),
+            emailRequiredError: () => document.getElementById(("email-required-error")),
+            emailError: () => document.getElementById(("email-error")),
+            emailInvalidErr: () => document.getElementById(("email-invalid-err")),
+            password: () => document.getElementById(("isenha")),
+            passwordInvalidError: () => document.getElementById(("password-invalid-error")),
+            passwordRequiredError: () => document.getElementById(("password-required-error")),
+            passwordError: () => document.getElementById(("password-error")),
+            senhaCurtaError: () => document.getElementById(("senha-curta-error")),
+            senhaNaoConfere: () => document.getElementById(("senha-nao-confere")),
+            confirm: () => document.getElementById(("iconfirm")),
+            recoveryButton: () => document.getElementById(("recovery-button")),
+            loginButton: () => document.getElementById(("login-button")),
+            botaoRegistro: () => document.getElementById(("botao-registro"))
+        }
+
+        window.onInputEmail = function() {
+            toggleButtonsDisable();
+            toggleEmailErrors();
+        };
+
+        window.onInputPassword = function() {
+            togglePasswordErrors();
+            toggleButtonsDisable();
+        };
+
+    function toggleEmailErrors(){
+        const email = formElements.email().value;
+        
+        formElements.emailRequiredError().style.display = email ? "none" : "block";
+        
+        formElements.emailInvalidError().style.display = (email && isEmailValid()) ? "none" : "block";
+    }
+
+    function togglePasswordErrors(){
+        const password = formElements.password().value;
+
+        formElements.passwordRequiredError().style.display = password ? "none" : "block";
+        
+        formElements.passwordInvalidError().style.display = password ? "none" : "block";
+    }
+
+    function toggleButtonsDisable(){
+
+    const emailValid = isEmailValid();
+    formElements.recoveryButton().disabled = !emailValid;
+
+    const passwordValid = isPasswordValid();
+    formElements.loginButton().disabled = !emailValid || !passwordValid;
+}
+
+    function isEmailValid(){
+        const email = formElements.email().value;
+        if (!email) {
+            return false;
+        }
+        return validateEmail((email));
+    }
+    
+    function isPasswordValid (){
+        const password = formElements.password().value;
+        if (!password){
+            return false;
+        }
+        return true;
+        }
+
+    function validateEmail(email){
+        return  /\S+@\S+\.\S+/.test(email);
+    }
+
+            function login(){
+
+            showLoading();
+            const email = formElements.email().value; 
+            const senha = formElements.password().value; 
+
+            function isEmailValid(){
+                const email = formElements.email().value;
+                if (!email) {
+                    hideLoading();
+                    return false;
+                }
+                return validateEmail((email));
+            }
+
+            function isPasswordValid (){
+                const password = formElements.password().value;
+                if (!password){
+                    return false;
+                }
+                return true;
+            }
+
+                signInWithEmailAndPassword(auth, email, senha).then(response =>{
+                    window.location.href = "logado.html";
+                }).catch(error => {
+                    hideLoading();
+                    alert("Usuário ou senha não cadastrados ! ");
+                    alert("Registre-se para continuar ou verifique email e senha digitados");
+                });
+            }
+
+            function recoveryPassword(){
+                    showLoading();
+                    
+                    const email = formElements.email().value;
+                    const auth = getAuth(app);  
+                    
+                        if (!email) {
+                            hideLoading();
+                            alert("Por favor, insira um email válido");
+                            return false;
+                        }
+
+                        sendPasswordResetEmail(auth, email).then(response =>{
+                            hideLoading();
+                            alert("Email de recuperação de senha enviado com sucesso!");
+                        }).catch(error => {
+                            hideLoading();
+                            alert(getErrorMessage(error));
+                        });
+                }
+
+            window.register = function() {  // Expondo a função register globalmente
+            window.location.href = "registro.html";
+        };
+
+        document.getElementById("login-button").addEventListener("click", login);
+        document.getElementById("recovery-button").addEventListener("click", recoveryPassword);
+
+    </script>
+</body>
+</html>

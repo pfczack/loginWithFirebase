@@ -1,0 +1,302 @@
+/* Estilo geral */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+    height: 100vh;
+    font-family: "Poppins", sans-serif;
+    font-size: x-large;
+    font-weight: 500;
+}
+
+.flex {
+    display: flex;
+}
+
+.btn-contato button {
+    padding: 10px 40px;
+    font-size: 18px;
+    font-weight: 600;
+    background-color: #00FF08;
+    border: 0;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+button:hover {
+    box-shadow: 0px 0px 8px #ffffffce;
+    transform: scale(1.2);
+}
+
+h2.titulo {
+    color: #fff;
+    font-size: 38px;
+    text-align: center;
+}
+
+h2.titulo span {
+    color: #00FF08;
+}
+
+header {
+    padding: 40px 4%;
+    width: 100%;
+}
+
+header img {
+    border-radius: 50%;
+    margin: 30px;
+    opacity: 55%;
+}
+
+header > .hd {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header a {
+    color: #7b7b7b;
+    text-decoration: none;
+    display: inline-block;
+    transition: .5s;
+}
+
+header a:hover {
+    color: white;
+    transform: scale(1.2);
+}
+
+header nav ul {
+    list-style: none;
+}
+
+header nav li {
+    display: inline-block;
+    padding: 0 40px;
+}
+
+
+section.toposite {
+    padding: 40px 4%;
+}
+
+section.toposite .flex {
+    align-items: center;
+    justify-content: center;
+    gap: 90px;
+}
+
+section .txt-topo-site h1 {
+    color: #fff;
+    font-size: 38px;
+}
+
+section .txt-topo-site h1 span {
+    color: #00FF08;
+    text-shadow: 2px 1px #fff;
+}
+
+section .txt-topo-site p {
+    color: #fff;
+    font-size: 20px;
+    margin: 40px 0;
+}
+
+section.toposite a {
+    text-decoration: none;
+}
+
+.toposite .img-topo-site img {
+    position: relative;
+    animation: flutuar 3s ease-in-out infinite alternate;
+}
+
+@keyframes flutuar {
+    0% {
+        top: 0;
+    }
+    100% {
+        top: 30px;
+    }
+}
+
+/* Estilo Trajetória */
+section.trajetoria {
+    padding: 40px 4%;
+}
+
+section.trajetoria .flex {
+    gap: 60px;
+}
+
+.trajetoria .trajetoria-box {
+    color: #fff;
+    padding: 40px;
+    border: 2px solid #fff;
+    margin-top: 45px;
+    border-radius: 30px;
+    transition: .5s;
+}
+
+.trajetoria .trajetoria-box:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px #ffffffc7;
+}
+
+.trajetoria .trajetoria-box i {
+    font-size: 70px;
+    color: #00FF08;
+}
+
+.trajetoria .trajetoria-box h3 {
+    font-size: 28px;
+    margin: 15px 0;
+}
+
+.trajetoria .trajetoria-box p {
+    text-align: center;
+}
+
+/* Estilo Sobre */
+section.sobre {
+    padding: 40px 4%;
+}
+
+section.sobre .flex {
+    align-items: center;
+    gap: 60px;
+}
+
+.sobre .txt-sobre {
+    color: white;
+}
+
+.sobre .txt-sobre h2 {
+    font-size: 40px;
+    line-height: 40px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.sobre .txt-sobre span {
+    color: #00FF08;
+    display: block;
+}
+
+.sobre .txt-sobre p {
+    margin: 10px 0;
+    text-align: justify;
+}
+
+.sobre .txt-sobre .btn-social button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    background-color: #00FF08;
+    font-size: 25px;
+    margin: 20px 20px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+@media (max-width: 768px) {
+    header > .hd {
+        flex-direction: column;
+    }
+
+    header nav ul {
+        padding: 0;
+    }
+
+    header nav li {
+        display: block;
+        padding: 10px 0;
+    }
+
+    section.toposite .flex {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .txt-topo-site h1 {
+        font-size: 32px;
+    }
+
+    .txt-topo-site p {
+        font-size: 18px;
+    }
+
+    .img-topo-site img {
+        width: 80%;
+        max-width: 300px;
+    }
+
+    section.trajetoria .flex {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .trajetoria .trajetoria-box {
+        width: 100%;
+    }
+
+    section.sobre .flex {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .txt-sobre h2 {
+        font-size: 32px;
+        line-height: 38px;
+    }
+
+    .txt-sobre p {
+        font-size: 18px;
+    }
+
+    .btn-social button {
+        margin: 10px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    header img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .txt-topo-site h1 {
+        font-size: 24px;
+    }
+
+    .txt-topo-site p {
+        font-size: 16px;
+    }
+
+    .img-topo-site img {
+        width: 70%;
+    }
+
+    .btn-contato button {
+        padding: 8px 30px;
+        font-size: 16px;
+    }
+
+    .trajetoria .trajetoria-box {
+        padding: 20px;
+    }
+
+    .txt-sobre h2 {
+        font-size: 28px;
+    }
+}

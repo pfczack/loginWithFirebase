@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="CSS/styleslogin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body id="login">
+    <h1 class="cadastro">Cadastro</h1>
+
+    <form class="loginform">
+        <div>
+            <label for="iemail">Email</label>
+        </div>
+        <div> 
+            <input type="email" name="email" id="iemail" placeholder="Digite seu email" oninput="onChangeEmail()">
+            <p id="email-error">Informar o email é obrigatório</p>
+            <p id="email-invalid-err">Este email é inválido</p>
+        </div>
+        <div>
+            <label for="isenha">Senha</label>
+        </div>
+        <div>
+            <input type="password" name="senha" id="isenha" placeholder="Digite sua senha" oninput="onChangePassword()">
+            <p id="password-error">Senha é obrigatória</p>
+            <p id="senha-curta-error">Senha muito curta</p>
+        </div>
+        <div>
+            <label for="iconfirm">Confirme a Senha</label>
+        </div>
+        <div>
+            <input type="password" name="senha" id="iconfirm" placeholder="Confirme sua senha" oninput="onChangePassword()">
+            <p id="senha-nao-confere">Senhas não conferem</p>
+        </div>
+        <div class="navig"><button type="button" disabled="true" id="botao-registro">Registrar</button></div>
+    </form>
+    <!-- <script src="JS/cadastro.js"></script> -->
+    <script src="JS/loading.js"></script>
+    <script src="JS/script.js"></script>
+    <script type="module" src="JS/log-in.js"></script>
+</body>
+</html>
